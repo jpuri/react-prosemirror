@@ -7,7 +7,7 @@ const {exampleSetup} = require("prosemirror-example-setup")
 import '../node_modules/prosemirror-menu/style/menu.css';
 import '../node_modules/prosemirror-view/style/prosemirror.css';
 
-class App extends Component {
+class Editor extends Component {
 
   componentDidMount() {
     const schema = new Schema({
