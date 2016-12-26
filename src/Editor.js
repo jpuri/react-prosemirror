@@ -2,23 +2,19 @@ import React, { Component } from 'react';
 const {EditorState} = require("prosemirror-state")
 const {MenuBarEditorView} = require("prosemirror-menu")
 const {DOMParser, Schema} = require("prosemirror-model")
-const {schema: baseSchema} = require("prosemirror-schema-basic")
-const {exampleSetup} = require("prosemirror-example-setup")
+const {schema} = require("./schema")
+const {setup} = require("./setup")
 import '../node_modules/prosemirror-menu/style/menu.css';
 import '../node_modules/prosemirror-view/style/prosemirror.css';
 
 class Editor extends Component {
 
   componentDidMount() {
-    const schema = new Schema({
-      nodes: baseSchema.nodeSpec,
-      marks: baseSchema.markSpec,
-    });
     let content = document.querySelector("#content");
     let view = new MenuBarEditorView(document.querySelector("#editor"), {
       state: EditorState.create({
         doc: DOMParser.fromSchema(schema).parse(content),
-        plugins: exampleSetup({schema})
+        plugins: setup({schema})
       }),
       onAction(action) { view.updateState(view.editor.state.applyAction(action)) },
     });
@@ -38,4 +34,4 @@ class Editor extends Component {
   }
 }
 
-export default App;
+export default Editor;
